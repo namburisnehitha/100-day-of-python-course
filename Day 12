@@ -1,0 +1,43 @@
+from random import randint
+from xml.dom.minidom import CharacterData
+
+from art import logo
+
+
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+
+def check_ans(guess,ans,turns):
+    if guess > ans:
+        print("too high!")
+        return turns -1
+    elif guess < ans:
+        print("too low!")
+        return turns -1
+    else:
+        print("you guessed correct")
+
+def difficulty():
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level == "easy":
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
+
+def game():
+    print(logo)
+    print("wellcome to the number guessing project")
+    print("I am thinking of a number between 1 and 100")
+    ans = randint(1,100)
+    turns = difficulty()
+    guess = 0
+    while guess != ans:
+        print(f"u have {turns} no of turns left")
+        guess = int(input("guess a number"))
+        check_ans(guess,ans,turns)
+        if turns == 0:
+            print("you are out of guesses")
+            return
+        elif guess != ans:
+            print("guess again")
+game()
